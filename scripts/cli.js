@@ -143,6 +143,15 @@ render(domNode);
     );
   }
 
+  if (!forced) {
+    console.log(chalk.cyanBright(`Running Yarn...`));
+
+    execSync(`yarn`, {
+      stdio: [0, 1, 2], // we need this so node will print the command output
+      cwd: installDir, // path to where you want to save the file
+    });
+  }
+
   // Print instructions for how to wire up the rest
   console.log(
     chalk.cyanBright(
