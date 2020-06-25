@@ -25,6 +25,8 @@ async function execute() {
   if (!name.includes("@instructure/")) {
     name = `@instructure/${name}`;
   }
+  const shortName = name.replace("@instructure/", "");
+
   console.log(chalk.cyanBright(`Creating a new package: ${name}`));
   // Check to see if we are anywhere close to a Canvas installation
   // Traverse the file system as far as we can go
@@ -63,7 +65,8 @@ async function execute() {
 
   // Make sure the name isn't taken
   // Loop through all of the packages and make sure none exactly match the name
-  if (await (await readdir(installDir)).includes(name)) {
+  const packageList = await readdir(installDir);
+  if (packageList.includes(name) || packageList.includes(shortName)) {
     console.error(
       chalk.redBright(
         `There is already a package named "${name}". Choose a different name.`,
@@ -72,8 +75,6 @@ async function execute() {
 
     process.exit(1);
   }
-
-  const shortName = name.replace("@instructure/", "");
 
   console.log(chalk.cyanBright("Cloning git repository..."));
   // Clone the canvas-app repository
