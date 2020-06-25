@@ -7,9 +7,9 @@
   "private": true,
   "bin": "scripts/cli.js",
   "scripts": {
-    "start": "NODE_ENV=development parcel index.html  src/index.tsx --out-dir lib --open",
-    "start:canvas": "NODE_ENV=development parcel  src/index.tsx --out-dir lib/src --no-hmr",
-    "build": "NODE_ENV=production parcel build src/index.tsx --no-content-hash --out-dir lib/src",
+    "start": "NODE_ENV=development parcel index.html  src/index.js --out-dir lib --open",
+    "start:canvas": "NODE_ENV=development parcel  src/index.js --out-dir lib/src --no-hmr",
+    "build": "NODE_ENV=production parcel build src/index.js --no-content-hash --out-dir lib/src",
     "prestart": "mkdir -p lib && cp -r public/* lib/",
     "postbuild": "cp -r public/* lib/",
     "test": "echo \"not implemented\"",
