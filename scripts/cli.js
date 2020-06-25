@@ -7,6 +7,7 @@ const {promisify} = require("util");
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 const readdir = promisify(fs.readdir);
+const unlink = promisify(fs.unlink);
 const {execSync} = require("child_process");
 
 // Make sure we get the required name argument (and prefix it with "@instructure" if necessary)
@@ -85,6 +86,14 @@ async function execute() {
       cwd: installDir, // path to where you want to save the file
     },
   );
+
+  // Delete the .git folder
+  if (!forced) {
+    execSync(`rm -rf .git`, {
+      stdio: [0, 1, 2], // we need this so node will print the command output
+      cwd: `${installDir}/${shortName}`, // path to where you want to save the file
+    });
+  }
 
   console.log(chalk.cyanBright("Updating package.json..."));
 
