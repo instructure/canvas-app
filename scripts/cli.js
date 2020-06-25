@@ -98,7 +98,7 @@ async function execute() {
   );
 
   console.log(chalk.cyanBright("Updating i18n references..."));
-  const i18n = await readFile(`${installDir}/${shortName}/src/i18n.js`);
+  const i18n = await readFile(`${installDir}/${shortName}/src/i18n.js`, "utf8");
   await writeFile(
     `${installDir}/${shortName}/src/i18n.js`,
     i18n.replace(/\/canvas-app\//gi, `/${shortName}/`),
@@ -125,6 +125,12 @@ render(domNode);
   }
 
   // Print instructions for how to wire up the rest
+  console.log(
+    chalk.cyanBright(
+      "Be sure to check out the readme to know how to use this package and integrate it with Canvas.\n",
+    ),
+  );
+
   console.log(chalk.greenBright("Installed successfully! Good luck!"));
 }
 
