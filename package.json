@@ -1,0 +1,63 @@
+{
+  "name": "@instructure/canvas-app",
+  "version": "0.0.1",
+  "description": "A boilerplate app for creating new rich Canvas pages",
+  "main": "lib/src/index.js",
+  "license": "AGPL-3",
+  "private": true,
+  "bin": "scripts/cli.js",
+  "scripts": {
+    "start": "NODE_ENV=development parcel index.html  src/index.tsx --out-dir lib --open",
+    "start:canvas": "NODE_ENV=development parcel  src/index.tsx --out-dir lib/src --no-hmr",
+    "build": "NODE_ENV=production parcel build src/index.tsx --no-content-hash --out-dir lib/src",
+    "prestart": "mkdir -p lib && cp -r public/* lib/",
+    "postbuild": "cp -r public/* lib/",
+    "test": "echo \"not implemented\"",
+    "test:coverage": "npm run test -- --coverage",
+    "build:canvas": "npm run build",
+    "clean": "rm -rf lib .cache",
+    "i18n:extract": "NODE_ENV=production format-message extract $(find src -name \"*.js\" -o -name \"*.ts\" -o -name \"*.tsx\") -g underscored_crc32 -o locales/en.json"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "dependencies": {
+    "@instructure/ui-buttons": "^7.1.0",
+    "@instructure/ui-heading": "^7.1.0",
+    "@instructure/ui-icons": "^7.1.0",
+    "@instructure/ui-link": "^7.1.0",
+    "@instructure/ui-svg-images": "^7.1.0",
+    "@instructure/ui-text": "^7.1.0",
+    "@instructure/ui-view": "^7.1.0",
+    "format-message": "^6.2.3",
+    "history": "^5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-error-boundary": "^2.2.2",
+    "react-router-dom": "^6.0.0-beta.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.3",
+    "@types/react": "^16.9.38",
+    "@types/react-dom": "^16.9.8",
+    "babel-plugin-macros": "^2.8.0",
+    "babel-preset-react-app": "^9.1.2",
+    "chalk": "^4.1.0",
+    "eslint-config-react-app": "^5.2.1",
+    "format-message-cli": "^6.2.3",
+    "msw": "^0.19.5",
+    "parcel-bundler": "^1.12.4"
+  }
+}
