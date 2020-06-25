@@ -9,17 +9,15 @@ import {
   useLocation,
 } from "react-router-dom";
 import {Link} from "@instructure/ui-link";
-
-// Lets try code splitting!
-const Home = React.lazy(() => import("./pages/home"));
-const About = React.lazy(() => import("./pages/about"));
-const Users = React.lazy(() => import("./pages/users"));
+import Home from "./pages/home";
+import About from "./pages/about";
+import Users from "./pages/users";
 
 const PathRedirect = () => {
   const location = useLocation();
   // We want to automatically redirect to the root URL
   // which Canvas will render our application on
-  if (location.pathname === "/") return <Navigate to="/app-test" replace />;
+  if (location.pathname === "/") return <Navigate to="/canvas-app" replace />;
   return null;
 };
 const Fallback = () => {
@@ -36,24 +34,24 @@ const App = () => {
           <nav>
             <ul>
               <li>
-                <Link as={NavLink} to="/app-test/">
+                <Link as={NavLink} to="/canvas-app/">
                   Home
                 </Link>
               </li>
               <li>
-                <Link as={NavLink} to="/app-test/about">
+                <Link as={NavLink} to="/canvas-app/about">
                   About
                 </Link>
               </li>
               <li>
-                <Link as={NavLink} to="/app-test/users">
+                <Link as={NavLink} to="/canvas-app/users">
                   Users
                 </Link>
               </li>
             </ul>
           </nav>
           <Routes>
-            <Route path="/app-test/*">
+            <Route path="/canvas-app/*">
               <Route path="/" element={<Home />} />
               <Route path="about" element={<About />} />
               <Route path="users" element={<Users />} />

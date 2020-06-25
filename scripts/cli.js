@@ -7,7 +7,6 @@ const {promisify} = require("util");
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 const readdir = promisify(fs.readdir);
-const unlink = promisify(fs.unlink);
 const {execSync} = require("child_process");
 
 // Make sure we get the required name argument (and prefix it with "@instructure" if necessary)
@@ -26,6 +25,7 @@ async function execute() {
   if (!name.includes("@instructure/")) {
     name = `@instructure/${name}`;
   }
+  name = name.replace(/\s/g, "-");
   const shortName = name.replace("@instructure/", "");
 
   console.log(chalk.cyanBright(`Creating a new package: ${name}`));
@@ -117,7 +117,7 @@ async function execute() {
   console.log(
     chalk.cyanBright(
       `Creating ${path.resolve(
-        `${installDir}/../app/jsx/bundles/${shortName}.js`,
+        `${installDir}/../app/jsx/bundles/${shortName.replace(/\-/g, "_")}.js`,
       )}`,
     ),
   );
